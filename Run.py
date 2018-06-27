@@ -122,7 +122,7 @@ if is_admin(): #Runs the script if running as admin
     Logo = tk.Label(root, image=logo)
     Logo.pack()
 
-    root.mainloop()
+    root.mainloop() #gittest
 else:
     ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
     #Restarts the script if not running as admin
