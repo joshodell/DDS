@@ -43,17 +43,20 @@ def EnableRA():
                    creationflags=CREATE_NO_WINDOW)
     if "Ok." in open('C:/DDSTEMP/ra-check1.txt').read() and "The operation completed successfully." in \
                                                              open('C:/DDSTEMP/ra-check2.txt').read():
+        shutil.rmtree('C:/DDSTEMP')
         tkinter.messagebox.showinfo("Enable Remote Access", "Successfully Enabled Remote Access")
     elif "Ok." in open('C:/DDSTEMP/ra-check1.txt').read() and "The operation completed successfully." not in \
                                                                open('C:/DDSTEMP/ra-check2.txt').read():
+        shutil.rmtree('C:/DDSTEMP')
         tkinter.messagebox.showerror("Enable Remote Access", "Disabled Firewall, but could not enable RDP")
     elif "Ok." not in open('C:/DDSTEMP/ra-check1.txt').read() and "The operation completed successfully." \
                                                                    in open('C:/DDSTEMP/ra-check2.txt').read():
+        shutil.rmtree('C:/DDSTEMP')
         tkinter.messagebox.showerror("Enable Remote Access", "RDP Enabled but could not disable Firewall")
     elif "Ok." not in open('C:/DDSTEMP/ra-check1.txt').read() and "The operation completed successfully." not in \
                                                                    open('C:/DDSTEMP/ra-check2.txt').read():
+        shutil.rmtree('C:/DDSTEMP')
         tkinter.messagebox.showerror("Enable Remote Access", "Could not disable Firewall or enable RDP")
-    shutil.rmtree('C:/DDSTEMP')
     return()
 
 def ConnectWiFi():
@@ -68,9 +71,10 @@ def ConnectWiFi():
                    stderr=subprocess.STDOUT, stdin=subprocess.PIPE, encoding='utf-8', bufsize=4096,
                    creationflags=CREATE_NO_WINDOW)
     if "Connection request was completed successfully" in open('C:/DDSTEMP/wifi.txt').read():
+        shutil.rmtree('C:/DDSTEMP')
         tkinter.messagebox.showinfo("WiFi", "Successfully connected to WiFi!")
-    else: tkinter.messagebox.showerror("WiFi", "Unable to connect to WiFi!")
-    shutil.rmtree('C:/DDSTEMP')
+    else:
+        tkinter.messagebox.showerror("WiFi", "Unable to connect to WiFi!")
     return()
 
 def is_admin(): #Finds out the script is running as admin
