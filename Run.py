@@ -10,23 +10,28 @@ import os
 
 CREATE_NO_WINDOW = 0x08000000 #Hides console window of functions
 
+
 def resource_path(relative_path):
     #Get absolute path to resource, works for dev and for PyInstaller
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
+
 def SupportPortal():
     webbrowser.open('http://www.ddssupportgroup.com', new=2)
     return()
+
 
 def SubmitTicket():
     webbrowser.open('http://www.oksupportgroup.com', new=2)
     return()
 
+
 def ShowIP():
     ip = socket.gethostbyname(socket.gethostname())
     tkinter.messagebox.showinfo("IP", "Your IP address is: %s" % ip)
     return()
+
 
 def EnableRA():
     if not os.path.exists('C:/DDSTEMP'):
@@ -55,6 +60,7 @@ def EnableRA():
     shutil.rmtree('C:/DDSTEMP')
     return()
 
+
 def ConnectWiFi():
     if not os.path.exists('C:/DDSTEMP'):
         os.mkdir('C:/DDSTEMP')
@@ -72,11 +78,13 @@ def ConnectWiFi():
     shutil.rmtree('C:/DDSTEMP')
     return()
 
+
 def is_admin(): #Finds out the script is running as admin
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
     except:
         return()
+
 
 if is_admin(): #Runs the script if running as admin
 
