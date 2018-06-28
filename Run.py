@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.messagebox
+from tkinter import *
 import socket
 import webbrowser
 import subprocess
@@ -10,28 +11,23 @@ import os
 
 CREATE_NO_WINDOW = 0x08000000 #Hides console window of functions
 
-
 def resource_path(relative_path):
     #Get absolute path to resource, works for dev and for PyInstaller
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
-
 def SupportPortal():
     webbrowser.open('http://www.ddssupportgroup.com', new=2)
     return()
-
 
 def SubmitTicket():
     webbrowser.open('http://www.oksupportgroup.com', new=2)
     return()
 
-
 def ShowIP():
     ip = socket.gethostbyname(socket.gethostname())
     tkinter.messagebox.showinfo("IP", "Your IP address is: %s" % ip)
     return()
-
 
 def EnableRA():
     if not os.path.exists('C:/DDSTEMP'):
@@ -60,7 +56,6 @@ def EnableRA():
     shutil.rmtree('C:/DDSTEMP')
     return()
 
-
 def ConnectWiFi():
     if not os.path.exists('C:/DDSTEMP'):
         os.mkdir('C:/DDSTEMP')
@@ -78,20 +73,23 @@ def ConnectWiFi():
     shutil.rmtree('C:/DDSTEMP')
     return()
 
-
 def is_admin(): #Finds out the script is running as admin
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
     except:
         return()
 
-
 if is_admin(): #Runs the script if running as admin
 
     root = tk.Tk()
 
-    w = 320  # width for the Tk root
-    h = 400  # height for the Tk root
+    root.resizable(False, False)
+    root.title("IT Support")
+    icon_path = resource_path("icon.ico")
+    root.iconbitmap(icon_path)
+
+    w = 325  # width for the Tk root
+    h = 235  # height for the Tk root
 
     # get screen width and height
     ws = root.winfo_screenwidth()  # width of the screen
@@ -105,32 +103,24 @@ if is_admin(): #Runs the script if running as admin
     # and where it is placed
     root.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
-    root.resizable(False, False)
-    root.title("IT Support")
-    icon_path = resource_path("icon.ico")
-    root.iconbitmap(icon_path)
-
     SupportPortalButton = tk.Button(root, text="DDS Portal", width=20, command=SupportPortal)
-    SupportPortalButton.pack(padx=30, pady=15)
-
     TicketButton = tk.Button(root, text="Submit A Ticket", width=20, command=SubmitTicket)
-    TicketButton.pack(padx=30, pady=15)
-
     IPButton = tk.Button(root, text="Find My IP", width=20, command=ShowIP)
-    IPButton.pack(padx=30, pady=15)
-
     RAButton = tk.Button(root, text="Enable Remote Access", width=20, command=EnableRA)
-    RAButton.pack(padx=30, pady=15)
-
     WiFiButton = tk.Button(root, text="Connect To WiFi", width=20, command=ConnectWiFi)
-    WiFiButton.pack(padx=30, pady=15)
-
     logo_path = resource_path("dds-logo3.png")
     logo = tk.PhotoImage(file=logo_path)
-    Logo = tk.Label(root, image=logo)
-    Logo.pack()
+    LogoWidget = tk.Label(root, image=logo)
+
+    SupportPortalButton.grid(column=0, row=0, padx=5, pady=5)
+    TicketButton.grid(column=1, row=0, padx=5, pady=5)
+    IPButton.grid(column=0, row=1, padx=5, pady=5)
+    RAButton.grid(column=1, row=1, padx=5, pady=5)
+    WiFiButton.grid(column=0, row=2, columnspan=2, padx=5, pady=5)
+    LogoWidget.grid(column=0, row=3, columnspan=2, padx=5, pady=5)
 
     root.mainloop()
+
 else:
     ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
     #Restarts the script if not running as admin
