@@ -1,6 +1,5 @@
 import tkinter as tk
 import tkinter.messagebox
-from tkinter import *
 import socket
 import webbrowser
 import subprocess
@@ -9,27 +8,33 @@ from shutil import copyfile
 import shutil
 import os
 
-CREATE_NO_WINDOW = 0x08000000 #Hides console window of functions
+CREATE_NO_WINDOW = 0x08000000
+# Hides console window of functions
+
 
 def resource_path(relative_path):
-    #Get absolute path to resource, works for dev and for PyInstaller
+    # Get absolute path to resource, works for dev and for PyInstaller
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
-def SupportPortal():
+
+def support_portal():
     webbrowser.open('http://www.ddssupportgroup.com', new=2)
     return()
 
-def SubmitTicket():
+
+def submit_ticket():
     webbrowser.open('http://www.oksupportgroup.com', new=2)
     return()
 
-def ShowIP():
+
+def show_ip():
     ip = socket.gethostbyname(socket.gethostname())
     tkinter.messagebox.showinfo("IP", "Your IP address is: %s" % ip)
     return()
 
-def EnableRA():
+
+def enable_ra():
     if not os.path.exists('C:/DDSTEMP'):
         os.mkdir('C:/DDSTEMP')
     copyfile(resource_path('ra-check1.txt'), 'C:/DDSTEMP/ra-check1.txt')
@@ -42,24 +47,25 @@ def EnableRA():
                    stderr=subprocess.STDOUT, stdin=subprocess.PIPE, encoding='utf-8', bufsize=4096,
                    creationflags=CREATE_NO_WINDOW)
     if "Ok." in open('C:/DDSTEMP/ra-check1.txt').read() and "The operation completed successfully." in \
-                                                             open('C:/DDSTEMP/ra-check2.txt').read():
+            open('C:/DDSTEMP/ra-check2.txt').read():
         shutil.rmtree('C:/DDSTEMP')
         tkinter.messagebox.showinfo("Enable Remote Access", "Successfully Enabled Remote Access")
     elif "Ok." in open('C:/DDSTEMP/ra-check1.txt').read() and "The operation completed successfully." not in \
-                                                               open('C:/DDSTEMP/ra-check2.txt').read():
+            open('C:/DDSTEMP/ra-check2.txt').read():
         shutil.rmtree('C:/DDSTEMP')
         tkinter.messagebox.showerror("Enable Remote Access", "Disabled Firewall, but could not enable RDP")
-    elif "Ok." not in open('C:/DDSTEMP/ra-check1.txt').read() and "The operation completed successfully." \
-                                                                   in open('C:/DDSTEMP/ra-check2.txt').read():
+    elif "Ok." not in open('C:/DDSTEMP/ra-check1.txt').read() and "The operation completed successfully." in \
+            open('C:/DDSTEMP/ra-check2.txt').read():
         shutil.rmtree('C:/DDSTEMP')
         tkinter.messagebox.showerror("Enable Remote Access", "RDP Enabled but could not disable Firewall")
     elif "Ok." not in open('C:/DDSTEMP/ra-check1.txt').read() and "The operation completed successfully." not in \
-                                                                   open('C:/DDSTEMP/ra-check2.txt').read():
+            open('C:/DDSTEMP/ra-check2.txt').read():
         shutil.rmtree('C:/DDSTEMP')
         tkinter.messagebox.showerror("Enable Remote Access", "Could not disable Firewall or enable RDP")
     return()
 
-def ConnectWiFi():
+
+def connect_wifi():
     if not os.path.exists('C:/DDSTEMP'):
         os.mkdir('C:/DDSTEMP')
     copyfile(resource_path('5qWKP09xSNPdW8pfFHLa.xml'), 'C:/DDSTEMP/5qWKP09xSNPdW8pfFHLa.xml')
@@ -77,13 +83,18 @@ def ConnectWiFi():
         tkinter.messagebox.showerror("WiFi", "Unable to connect to WiFi!")
     return()
 
-def is_admin(): #Finds out the script is running as admin
+
+def is_admin():
+    # Finds out the script is running as admin
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
     except:
         return()
 
-if is_admin(): #Runs the script if running as admin
+
+if is_admin():
+
+    # Runs the script if running as admin
 
     root = tk.Tk()
 
@@ -107,11 +118,11 @@ if is_admin(): #Runs the script if running as admin
     # and where it is placed
     root.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
-    SupportPortalButton = tk.Button(root, text="DDS Portal", width=20, command=SupportPortal)
-    TicketButton = tk.Button(root, text="Submit A Ticket", width=20, command=SubmitTicket)
-    IPButton = tk.Button(root, text="Find My IP", width=20, command=ShowIP)
-    RAButton = tk.Button(root, text="Enable Remote Access", width=20, command=EnableRA)
-    WiFiButton = tk.Button(root, text="Connect To WiFi", width=20, command=ConnectWiFi)
+    SupportPortalButton = tk.Button(root, text="DDS Portal", width=20, command=support_portal)
+    TicketButton = tk.Button(root, text="Submit A Ticket", width=20, command=submit_ticket)
+    IPButton = tk.Button(root, text="Find My IP", width=20, command=show_ip)
+    RAButton = tk.Button(root, text="Enable Remote Access", width=20, command=enable_ra)
+    WiFiButton = tk.Button(root, text="Connect To WiFi", width=20, command=connect_wifi)
     logo_path = resource_path("dds-logo3.png")
     logo = tk.PhotoImage(file=logo_path)
     LogoWidget = tk.Label(root, image=logo)
@@ -127,5 +138,5 @@ if is_admin(): #Runs the script if running as admin
 
 else:
     ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
-    #Restarts the script if not running as admin
+    # Restarts the script if not running as admin
 
