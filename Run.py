@@ -91,6 +91,30 @@ def is_admin():
     except:
         return()
 
+def join_domain():
+    window = tk.Toplevel(root)
+    window.iconbitmap(icon_path)
+
+    w = 250
+    h = 90
+    ws = window.winfo_screenwidth()
+    hs = window.winfo_screenheight()
+    x = (ws / 2) - (w / 2)
+    y = (hs / 2) - (h / 2)
+    window.geometry('%dx%d+%d+%d' % (w, h, x, y))
+
+    computernamelabel = tk.Label(window, text="Computer Name:")
+    computername = tk.Entry(window)
+    JoinButton = tk.Button(window, text="Join", width=15)
+
+    computernamelabel.grid(column=0, row=0, padx=5, pady=10)
+    computername.grid(column=1, row=0, padx=5, pady=10)
+    JoinButton.grid(column=0, row=1, columnspan=2, padx=10, pady=5)
+
+
+    window.mainloop()
+    return()
+
 
 if is_admin():
 
@@ -123,6 +147,7 @@ if is_admin():
     IPButton = tk.Button(root, text="Find My IP", width=20, command=show_ip)
     RAButton = tk.Button(root, text="Enable Remote Access", width=20, command=enable_ra)
     WiFiButton = tk.Button(root, text="Connect To WiFi", width=20, command=connect_wifi)
+    DomainButton = tk.Button(root, text="Join Domain", width =20, command=join_domain)
     logo_path = resource_path("dds-logo3.png")
     logo = tk.PhotoImage(file=logo_path)
     LogoWidget = tk.Label(root, image=logo)
@@ -131,7 +156,8 @@ if is_admin():
     TicketButton.grid(column=1, row=0, padx=5, pady=5)
     IPButton.grid(column=0, row=1, padx=5, pady=5)
     RAButton.grid(column=1, row=1, padx=5, pady=5)
-    WiFiButton.grid(column=0, row=2, columnspan=2, padx=5, pady=5)
+    WiFiButton.grid(column=0, row=2, padx=5, pady=5)
+    DomainButton.grid(column=1, row=2, padx=5, pady=5)
     LogoWidget.grid(column=0, row=3, columnspan=2, padx=5, pady=5)
 
     root.mainloop()
