@@ -57,17 +57,17 @@ class MainWindow():
         self.DomainButton.grid(column=1, row=2, padx=5, pady=5)
         self.LogoWidget.grid(column=0, row=3, columnspan=2, padx=5, pady=5)
 
-    def support_portal():
+    def support_portal(self):
         webbrowser.open('http://www.ddssupportgroup.com', new=2)
 
-    def submit_ticket():
+    def submit_ticket(self):
         webbrowser.open('http://www.oksupportgroup.com', new=2)
 
-    def show_ip():
+    def show_ip(self):
         ip = socket.gethostbyname(socket.gethostname())
         tkinter.messagebox.showinfo("IP", "Your IP address is: %s" % ip)
 
-    def enable_ra():
+    def enable_ra(self):
         if not os.path.exists('C:/DDSTEMP'):
             os.mkdir('C:/DDSTEMP')
         copyfile(resource_path('ra-check1.txt'), 'C:/DDSTEMP/ra-check1.txt')
@@ -96,7 +96,7 @@ class MainWindow():
             shutil.rmtree('C:/DDSTEMP')
             tkinter.messagebox.showerror("Enable Remote Access", "Could not disable Firewall or enable RDP")
 
-    def connect_wifi():
+    def connect_wifi(self):
         if not os.path.exists('C:/DDSTEMP'):
             os.mkdir('C:/DDSTEMP')
         copyfile(resource_path('5qWKP09xSNPdW8pfFHLa.xml'), 'C:/DDSTEMP/5qWKP09xSNPdW8pfFHLa.xml')
