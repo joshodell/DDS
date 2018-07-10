@@ -39,8 +39,8 @@ class MainWindow():
         y = (hs / 2) - (h / 2)
         self.master.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
-        self.SupportPortalButton = tk.Button(root, text="DDS Portal", width=20, command=MainWindow.support_portal)
-        self.TicketButton = tk.Button(root, text="Submit A Ticket", width=20, command=MainWindow.submit_ticket)
+        self.SupportPortalButton = tk.Button(root, text="DDS Portal", width=20, command=self.support_portal)
+        self.TicketButton = tk.Button(root, text="Submit A Ticket", width=20, command=self.submit_ticket)
         self.IPButton = tk.Button(root, text="Find My IP", width=20, command=self.show_ip)
         self.RAButton = tk.Button(root, text="Enable Remote Access", width=20, command=self.enable_ra)
         self.WiFiButton = tk.Button(root, text="Connect To WiFi", width=20, command=self.connect_wifi)
