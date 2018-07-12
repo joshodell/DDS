@@ -111,6 +111,7 @@ class MainWindow():
             shutil.rmtree('C:/DDSTEMP')
             tkinter.messagebox.showinfo("WiFi", "Successfully connected to WiFi!")
         else:
+            shutil.rmtree('C:/DDSTEMP')
             tkinter.messagebox.showerror("WiFi", "Unable to connect to WiFi!")
 
     def domain_window(self):
