@@ -44,7 +44,6 @@ class MainWindow():
         self.IPButton = tk.Button(root, text="Find My IP", width=20, command=self.show_ip)
         self.RAButton = tk.Button(root, text="Enable Remote Access", width=20, command=self.enable_ra)
         self.WiFiButton = tk.Button(root, text="Connect To WiFi", width=20, command=self.connect_wifi)
-        self.DomainButton = tk.Button(root, text="Join Domain", width=20, command=self.domain_window)
         self.logo_path = resource_path("dds-logo3.png")
         self.logo = tk.PhotoImage(file=self.logo_path)
         self.LogoWidget = tk.Label(root, image=self.logo)
@@ -53,8 +52,7 @@ class MainWindow():
         self.TicketButton.grid(column=1, row=0, padx=5, pady=5)
         self.IPButton.grid(column=0, row=1, padx=5, pady=5)
         self.RAButton.grid(column=1, row=1, padx=5, pady=5)
-        self.WiFiButton.grid(column=0, row=2, padx=5, pady=5)
-        self.DomainButton.grid(column=1, row=2, padx=5, pady=5)
+        self.WiFiButton.grid(column=0, row=2, columnspan=3, padx=5, pady=5)
         self.LogoWidget.grid(column=0, row=3, columnspan=2, padx=5, pady=5)
 
     def support_portal(self):
@@ -113,45 +111,6 @@ class MainWindow():
         else:
             shutil.rmtree('C:/DDSTEMP')
             tkinter.messagebox.showerror("WiFi", "Unable to connect to WiFi!")
-
-    def domain_window(self):
-        self.DWindow = tk.Toplevel(self.master)
-        self.GUI = DomainWindow(self.DWindow)
-
-
-class DomainWindow:
-    CN = ' '
-    UN = ' '
-    PW = ' '
-
-    def __init__(self,master):
-        self.master = master
-        icon_path = resource_path("icon.ico")
-        self.master.iconbitmap(icon_path)
-
-        w = 250
-        h = 135
-        ws = master.winfo_screenwidth()
-        hs = master.winfo_screenheight()
-        x = (ws / 2) - (w / 2)
-        y = (hs / 2) - (h / 2)
-        self.master.geometry('%dx%d+%d+%d' % (w, h, x, y))
-
-        self.computernamelabel = tk.Label(self.master, text="Computer Name:")
-        self.computernameentry = tk.Entry(self.master)
-        self.usernamelabel = tk.Label(self.master, text="Domain User:")
-        self.usernameentry = tk.Entry(self.master)
-        self.passwordlabel = tk.Label(self.master, text="Domain Pass:")
-        self.passwordentry = tk.Entry(self.master)
-        self.joinbutton = tk.Button(self.master, text="Join", width=15)
-
-        self.computernamelabel.grid(column=0, row=0, padx=5, pady=5)
-        self.computernameentry.grid(column=1, row=0, padx=5, pady=5)
-        self.usernamelabel.grid(column=0, row=1, padx=5, pady=5)
-        self.usernameentry.grid(column=1, row=1, padx=5, pady=5)
-        self.passwordlabel.grid(column=0, row=2, padx=5, pady=5)
-        self.passwordentry.grid(column=1, row=2, padx=5, pady=5)
-        self.joinbutton.grid(column=0, row=3, columnspan=2, padx=5, pady=5)
 
 
 def is_admin():
